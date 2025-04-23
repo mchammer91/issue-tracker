@@ -6,6 +6,12 @@ import { issues } from '../assets/mock-issues';
   providedIn: 'root'
 })
 export class IssuesService {
+  issues: Issue[] = issues;
 
-  getPendingIssues = (): Issue[] => issues.filter(i => !i.completed);
+  getPendingIssues = (): Issue[] => this.issues.filter(i => !i.completed);
+
+  createIssue(issue: Issue) {
+    issue.issueNo = this.issues.length + 1;
+    this.issues.push(issue);
+  }
 }

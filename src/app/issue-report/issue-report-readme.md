@@ -1,0 +1,2 @@
+Humble momment: finally clicks how Angular forms build on top of HTML forms. 
+Helps to put the FormGroup directive on an HTML form element, and have the `ngSubmit` event emitter on that form element too. This works in conjuction with the Create button having the `type="submit"` attribute on it to wire it all up.

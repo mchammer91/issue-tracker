@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IssuesService } from '../issues.service';
 import { Issue } from '../issue';
 import { ClarityModule } from '@clr/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-issue-list',
