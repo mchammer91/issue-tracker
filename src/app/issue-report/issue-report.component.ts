@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { IssuesService } from '../issues.service';
 import { Issue } from '../issue';
@@ -13,15 +13,20 @@ import { Issue } from '../issue';
 })
 export class IssueReportComponent {
   issueForm = new FormGroup<IssueForm>({
-    title: new FormControl('', { nonNullable: true }),
+    title: new FormControl('', { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true }),
-    priority: new FormControl('', { nonNullable: true }),
-    type: new FormControl('', { nonNullable: true })
+    priority: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    type: new FormControl('', { nonNullable: true, validators: Validators.required })
   });
+
+  formClose = output();
 
   constructor(private issuesService: IssuesService) {}
 
-  addIssue = () => this.issuesService.createIssue(this.issueForm.getRawValue() as Issue);
+  addIssue() {
+    this.issuesService.createIssue(this.issueForm.getRawValue() as Issue);
+    this.formClose.emit();
+  } 
 }
 
 interface IssueForm {
