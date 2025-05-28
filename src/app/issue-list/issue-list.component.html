@@ -1,21 +1,31 @@
 <ng-container *ngIf="showReportIssue === false">
-  <button class="btn btn-primary" (click)="showReportIssue = true">Add New Issue</button>
-  <clr-datagrid>
-      <clr-dg-column [clrDgField]="'issueNo'" [clrDgColType]="'number'">Issue No</clr-dg-column>
-      <clr-dg-column [clrDgField]="'type'">Type</clr-dg-column>
-      <clr-dg-column [clrDgField]="'title'">Title</clr-dg-column>
-      <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
-      <clr-dg-column [clrDgField]="'priority'">Priority</clr-dg-column>
-      <clr-dg-row *clrDgItems="let issue of issues">
-        <clr-dg-cell>{{issue.issueNo}}</clr-dg-cell>
-        <clr-dg-cell>{{issue.type}}</clr-dg-cell>
-        <clr-dg-cell>{{issue.title}}</clr-dg-cell>
-        <clr-dg-cell>{{issue.description}}</clr-dg-cell>
-        <clr-dg-cell>
-         <span class="label" [class.label-danger]="issue.priority === 'high'">{{issue.priority}}</span>
-        </clr-dg-cell>
-      </clr-dg-row>
-      <clr-dg-footer>{{issues.length}} issues</clr-dg-footer>
-  </clr-datagrid>  
+  <button mat-raised-button color="primary" (click)="showReportIssue = true">Add New Issue</button>
+  <table mat-table [dataSource]="issues" class="mat-elevation-z8" style="width: 100%; margin-top: 16px;">
+    <ng-container matColumnDef="issueNo">
+      <th mat-header-cell *matHeaderCellDef> Issue No </th>
+      <td mat-cell *matCellDef="let issue">{{issue.issueNo}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let issue">{{issue.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let issue">{{issue.title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let issue">{{issue.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef> Priority </th>
+      <td mat-cell *matCellDef="let issue">
+        <span [ngClass]="{'mat-badge mat-badge-danger': issue.priority === 'high'}">{{issue.priority}}</span>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['issueNo', 'type', 'title', 'description', 'priority']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['issueNo', 'type', 'title', 'description', 'priority'];"></tr>
+  </table>
+  <div style="margin-top: 8px;">{{issues.length}} issues</div>
 </ng-container>
 <app-issue-report *ngIf="showReportIssue === true" (formClose)="onCloseReport()"></app-issue-report>

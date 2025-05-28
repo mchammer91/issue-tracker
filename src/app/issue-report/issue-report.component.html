@@ -1,36 +1,27 @@
-<h3>Report an issue</h3>
-<form clrForm *ngIf="issueForm" [formGroup]="issueForm" (ngSubmit)="addIssue()">
-  <clr-input-container>
-    <label>Title</label>
-    <input clrInput formControlName="title" />
-  </clr-input-container>
-  <clr-textarea-container>
-    <label>Description</label>
-    <textarea clrTextarea
-      formControlName="description"></textarea>
-  </clr-textarea-container>
-  <clr-radio-container clrInline>
-    <label>Priority</label>
-    <clr-radio-wrapper>
-      <input type="radio" value="low" clrRadio
-         formControlName="priority" />
-      <label>Low</label>
-    </clr-radio-wrapper>
-    <clr-radio-wrapper>
-      <input type="radio" value="high" clrRadio
-        formControlName="priority" />
-      <label>High</label>
-    </clr-radio-wrapper>
-  </clr-radio-container>
-  <clr-select-container>
-    <label>Type</label>
-    <select clrSelect formControlName="type">
-      <option value="Feature">Feature</option>
-      <option value="Bug">Bug</option>
-      <option value="Documentation">Documentation
-        </option>
-    </select>
-  </clr-select-container>
-  <button class="btn btn-primary" type="submit">Create</button>
-  <button class="btn" type="button" (click)="formClose.emit()">Cancel</button>
+<form [formGroup]="issueForm" (ngSubmit)="addIssue()">
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" required />
+    <mat-error *ngIf="issueForm.get('title')?.hasError('required')">Title is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <mat-radio-group formControlName="priority" style="display: flex; flex-direction: row; margin-bottom: 16px;">
+    <mat-label>Priority</mat-label>
+    <mat-radio-button value="low">Low</mat-radio-button>
+    <mat-radio-button value="high">High</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type" required>
+      <mat-option value="Feature">Feature</mat-option>
+      <mat-option value="Bug">Bug</mat-option>
+      <mat-option value="Documentation">Documentation</mat-option>
+    </mat-select>
+    <mat-error *ngIf="issueForm.get('type')?.hasError('required')">Type is required</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" style="margin-top: 16px;">Create</button>
+  <button mat-button type="button" (click)="formClose.emit()" style="margin-top: 16px; margin-left: 8px;">Cancel</button>
 </form>

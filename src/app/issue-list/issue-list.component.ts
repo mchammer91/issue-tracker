@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { IssuesService } from '../issues.service';
 import { Issue } from '../issue';
-import { ClarityModule } from '@clr/angular';
-import { NgIf } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf, NgClass } from '@angular/common';
 import { IssueReportComponent } from "../issue-report/issue-report.component";
 
 @Component({
   selector: 'app-issue-list',
   standalone: true,
-  imports: [ClarityModule, NgIf, IssueReportComponent],
+  imports: [MatTableModule, MatButtonModule, NgIf, NgClass, IssueReportComponent],
   templateUrl: './issue-list.component.html',
   styleUrl: './issue-list.component.css'
 })
