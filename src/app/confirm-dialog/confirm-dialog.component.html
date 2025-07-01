@@ -1,8 +1,8 @@
 <h3 mat-dialog-title>Resolve Issue # {{issueNo}}</h3>
 <mat-dialog-content>
-  <p>Are you sure you want to resolve this issue?</p>
+  <p>Are you sure you want to close this issue?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="disagree()">No Thanks</button>
-  <button mat-button (click)="agree()" cdkFocusInitial>Ok</button>
+  <button mat-button color="warn" (click)="disagree()">Cancel</button>
+  <button mat-button color="primary" (click)="agree()" cdkFocusInitial>Yes</button>
 </mat-dialog-actions>
